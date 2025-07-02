@@ -1,0 +1,23 @@
+*.iml
+.gradle
+/local.properties
+.idea/
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+
+# Built application files
+*.apk
+*.aar
+*.ap_
+*.aab
+
+# OS generated files
+.DS_Store
+*/.DS_Store
+
+# Android Profiling
+*.hprof
