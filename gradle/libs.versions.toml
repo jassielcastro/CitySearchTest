@@ -13,6 +13,12 @@ googleDevtoolsKsp = "2.0.21-1.0.27"
 truth = "1.4.4"
 androidTestCode = "1.6.1"
 kotlinCoroutinesTest = "1.10.1"
+retrofit = "3.0.0"
+retrofitConverterMoshi = "3.0.0"
+retrofitConverterMoshiAdapter = "1.15.0"
+retrofitOkhttp = "4.12.0"
+retrofitInterceptor = "4.12.0"
+moshi = "1.15.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -27,6 +33,14 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 room-paging = { group = "androidx.room", name = "room-paging", version.ref = "room" }
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+retrofit-converter-moshi = { group = "com.squareup.retrofit2", name = "converter-moshi", version.ref = "retrofitConverterMoshi" }
+retrofit-converter-moshi-adapter = { group = "com.squareup.moshi", name = "moshi-adapters", version.ref = "retrofitConverterMoshiAdapter" }
+retrofit-okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "retrofitOkhttp" }
+retrofit-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "retrofitInterceptor" }
+moshi = { group = "com.squareup.moshi", name = "moshi", version.ref = "moshi" }
+moshi-code-gen = { group = "com.squareup.moshi", name = "moshi-kotlin-codegen", version.ref = "moshi" }
+moshi-kotlin = { group = "com.squareup.moshi", name = "moshi-kotlin", version.ref = "moshi" }
 
 # Testing
 junit = { group = "junit", name = "junit", version.ref = "junit" }

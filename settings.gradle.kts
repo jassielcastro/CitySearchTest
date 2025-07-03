@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 rootProject.name = "CitySearch"
 include(":app")
 include(":storage")
+include(":data-source-manager")
