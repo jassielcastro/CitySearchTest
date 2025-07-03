@@ -25,7 +25,7 @@ interface CitiesDAO {
         LIMIT :limit OFFSET :offset
     """
     )
-    fun getCitiesBy(
+    suspend fun getCitiesBy(
         favorite: Boolean,
         prefix: String,
         limit: Int,
