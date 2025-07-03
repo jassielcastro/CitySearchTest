@@ -16,7 +16,7 @@ android {
         release {
             buildConfigField("Boolean", "DEBUG", "false")
         }
-        
+
         debug {
             buildConfigField("Boolean", "DEBUG", "true")
         }
@@ -45,4 +45,10 @@ dependencies {
     implementation(libs.moshi)
     implementation(libs.moshi.kotlin)
     ksp(libs.moshi.code.gen)
+
+    testImplementation(libs.junit)
+    testImplementation(libs.room.testing)
+    testImplementation(libs.google.truth)
+    testImplementation(libs.kotlinx.coroutines)
+    testImplementation(libs.mockK)
 }

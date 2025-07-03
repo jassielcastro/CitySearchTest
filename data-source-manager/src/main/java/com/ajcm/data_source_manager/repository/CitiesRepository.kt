@@ -26,7 +26,7 @@ class CitiesRepository(
         it.mapToDomain()
     }
 
-    suspend fun getCityById(cityId: Int) = citiesDao.getCityById(cityId).mapToDomain()
+    suspend fun getCityById(cityId: Int) = citiesDao.getCityById(cityId)?.mapToDomain()
 
     suspend fun updateFavorite(cityId: Int, isFavorite: Boolean) {
         citiesDao.updateFavorite(cityId, isFavorite)
@@ -37,13 +37,13 @@ class CitiesRepository(
             val cities = citiesGistService.getCitiesData(CITIES_URL)
             if (cities.isSuccessful) {
                 val result = cities.body()
-                if (result != null) {
+                if (result != null && result.isNotEmpty()) {
                     citiesDao.insertCities(result.map { it.mapToEntity() })
                     return ResponseStatus.Success(Unit)
                 }
             }
             return ResponseStatus.Error
-        } catch (exception: Exception) {
+        } catch (_: Exception) {
             return ResponseStatus.Error
         }
     }
