@@ -42,7 +42,7 @@ interface CitiesDAO {
         WHERE id = :cityId
     """
     )
-    suspend fun getCityById(cityId: Int): City
+    suspend fun getCityById(cityId: Int): City?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCities(cities: List<City>)

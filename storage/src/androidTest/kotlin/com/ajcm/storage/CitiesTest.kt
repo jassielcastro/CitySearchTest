@@ -11,6 +11,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Assert.assertNotEquals
 import kotlinx.coroutines.runBlocking
 import org.junit.After
+import org.junit.Assert.assertNull
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -112,7 +113,7 @@ class CitiesTest {
         dao.updateFavorite(cityId, false)
 
         val updatedCity = dao.getCityById(cityId)
-        assertEquals(false, updatedCity.favorite)
+        assertEquals(false, updatedCity?.favorite)
     }
 
     @Test
@@ -122,10 +123,20 @@ class CitiesTest {
         val cityId = 707860 // Hurzuf
         val city = dao.getCityById(cityId)
 
-        assertEquals(cityId, city.id)
-        assertEquals("Hurzuf", city.name)
-        assertEquals("UA", city.country)
-        assertEquals(Coordinate(34.28, 44.55), city.coordinate)
-        assertTrue(city.favorite)
+        assertEquals(cityId, city?.id)
+        assertEquals("Hurzuf", city?.name)
+        assertEquals("UA", city?.country)
+        assertEquals(Coordinate(34.28, 44.55), city?.coordinate)
+        assertTrue(city?.favorite == true)
+    }
+
+    @Test
+    fun getCityByIdThatDoesNotExist() = runBlocking {
+        dao.insertCities(sampleCities())
+
+        val cityId = 1
+        val city = dao.getCityById(cityId)
+
+        assertNull(city)
     }
 }
