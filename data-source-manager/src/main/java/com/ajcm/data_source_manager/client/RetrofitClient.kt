@@ -1,5 +1,6 @@
 package com.ajcm.data_source_manager.client
 
+import com.ajcm.data_source_manager.BuildConfig
 import com.squareup.moshi.Moshi
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory

@@ -12,6 +12,16 @@ android {
         minSdk = 26
     }
 
+    buildTypes {
+        release {
+            buildConfigField("Boolean", "DEBUG", "false")
+        }
+        
+        debug {
+            buildConfigField("Boolean", "DEBUG", "true")
+        }
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
