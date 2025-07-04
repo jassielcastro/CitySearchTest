@@ -50,6 +50,9 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.koin.android.compose)
+    implementation(libs.moshi)
+    implementation(libs.moshi.kotlin)
 
     testImplementation(libs.junit)
 

@@ -24,6 +24,7 @@ android {
 
 dependencies {
     implementation(libs.room.runtime)
+    implementation(libs.koin.core)
     implementation(libs.room.paging)
     ksp(libs.room.compiler)
 

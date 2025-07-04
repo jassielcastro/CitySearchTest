@@ -20,6 +20,7 @@ retrofitOkhttp = "4.12.0"
 retrofitInterceptor = "4.12.0"
 moshi = "1.15.2"
 mockK = "1.14.4"
+koin = "4.0.3"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -42,6 +43,8 @@ retrofit-interceptor = { group = "com.squareup.okhttp3", name = "logging-interce
 moshi = { group = "com.squareup.moshi", name = "moshi", version.ref = "moshi" }
 moshi-code-gen = { group = "com.squareup.moshi", name = "moshi-kotlin-codegen", version.ref = "moshi" }
 moshi-kotlin = { group = "com.squareup.moshi", name = "moshi-kotlin", version.ref = "moshi" }
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+koin-android-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin" }
 
 # Testing
 junit = { group = "junit", name = "junit", version.ref = "junit" }

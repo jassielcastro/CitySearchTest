@@ -42,8 +42,8 @@ dependencies {
     implementation(libs.retrofit.converter.moshi.adapter)
     implementation(libs.retrofit.okhttp)
     implementation(libs.retrofit.interceptor)
+    implementation(libs.koin.core)
     implementation(libs.moshi)
-    implementation(libs.moshi.kotlin)
     ksp(libs.moshi.code.gen)
 
     testImplementation(libs.junit)
