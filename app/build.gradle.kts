@@ -42,6 +42,7 @@ android {
 dependencies {
     implementation(project(":data-source-manager"))
     implementation(project(":storage"))
+    implementation(libs.android.splash)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

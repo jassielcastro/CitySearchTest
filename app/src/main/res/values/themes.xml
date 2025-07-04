@@ -2,4 +2,9 @@
 <resources>
 
     <style name="Theme.CitySearch" parent="android:Theme.Material.Light.NoActionBar" />
+
+    <style name="Theme.Cities.Splash" parent="Theme.SplashScreen">
+        <item name="android:windowBackground">@drawable/splash_bg</item>
+        <item name="postSplashScreenTheme">@style/Theme.CitySearch</item>
+    </style>
 </resources>
