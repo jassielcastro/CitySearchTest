@@ -22,6 +22,12 @@ moshi = "1.15.2"
 mockK = "1.14.4"
 koin = "4.0.3"
 splash = "1.0.1"
+navigation = "2.9.1"
+kotlinSerializationPlugin = "2.2.0"
+kotlinSerialization = "1.8.1"
+googleMaps = "4.4.1"
+googleMapsServices = "18.2.0"
+paginCompose = "3.3.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -33,9 +39,11 @@ androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
 androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+androidx-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation" }
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 room-paging = { group = "androidx.room", name = "room-paging", version.ref = "room" }
+room-paging-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "paginCompose" }
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofit-converter-moshi = { group = "com.squareup.retrofit2", name = "converter-moshi", version.ref = "retrofitConverterMoshi" }
 retrofit-converter-moshi-adapter = { group = "com.squareup.moshi", name = "moshi-adapters", version.ref = "retrofitConverterMoshiAdapter" }
@@ -47,6 +55,9 @@ moshi-kotlin = { group = "com.squareup.moshi", name = "moshi-kotlin", version.re
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-android-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin" }
 android-splash = { module = "androidx.core:core-splashscreen", version.ref = "splash" }
+kotlin-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinSerialization" }
+google-maps = { group = "com.google.maps.android", name = "maps-compose", version.ref = "googleMaps" }
+google-maps-services = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "googleMapsServices" }
 
 # Testing
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -65,3 +76,4 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 google-devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "googleDevtoolsKsp" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinSerializationPlugin" }

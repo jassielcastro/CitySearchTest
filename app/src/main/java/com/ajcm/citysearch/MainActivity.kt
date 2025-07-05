@@ -5,8 +5,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.ajcm.citysearch.ui.CitiesMainContainer
 import com.ajcm.citysearch.ui.theme.CitySearchTheme
+import com.ajcm.citysearch.ui.MainAppContainer
 import org.koin.androidx.compose.KoinAndroidContext
 
 class MainActivity : ComponentActivity() {
@@ -17,7 +17,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             CitySearchTheme {
                 KoinAndroidContext {
-                    CitiesMainContainer()
+                    MainAppContainer()
                 }
             }
         }
