@@ -4,6 +4,7 @@
     <string name="search_hint">Search</string>
     <string name="search_error_title">Something went wrong…</string>
     <string name="search_error_message">An error occurred while loading the data.</string>
+    <string name="search_empty_message">No matches found</string>
     <string name="loading_title">Loading</string>
     <string name="loading_hint_1">Scouting cities… with binocular</string>
     <string name="loading_hint_2">Waking up sleepy towns…</string>
