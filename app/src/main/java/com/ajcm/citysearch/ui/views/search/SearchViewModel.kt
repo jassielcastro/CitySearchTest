@@ -39,14 +39,15 @@ class SearchViewModel(
     private val _refreshTrigger = MutableSharedFlow<Unit>(extraBufferCapacity = 1)
     val refreshTrigger = _refreshTrigger.asSharedFlow()
 
-    @OptIn(ExperimentalCoroutinesApi::class)
+    @OptIn(ExperimentalCoroutinesApi::class, FlowPreview::class)
     val cities: Flow<PagingData<City>> = combine(
         _favorite, debouncedPrefix
     ) { favorite, prefix ->
         favorite to prefix
-    }.flatMapLatest { (favorite, prefix) ->
-        repository.getCitiesBy(favorite, prefix).cachedIn(viewModelScope)
-    }
+    }.debounce(100)
+        .flatMapLatest { (favorite, prefix) ->
+            repository.getCitiesBy(favorite, prefix).cachedIn(viewModelScope)
+        }
 
     fun loadCities() = viewModelScope.launch {
         _citiesState.value = UiState.Loading
