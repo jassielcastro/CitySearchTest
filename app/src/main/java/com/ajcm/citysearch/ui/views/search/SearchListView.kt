@@ -104,6 +104,7 @@ fun CitiesListView(
                     .background(MaterialTheme.colorScheme.background),
             ) {
                 SearchBarView(
+                    onFavoriteSelected = viewModel.isFavoriteSelected(),
                     onSearch = { prefix ->
                         viewModel.updateSearchQuery(prefix)
                     },

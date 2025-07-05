@@ -70,6 +70,10 @@ class SearchViewModel(
         _favorite.value = if (favorites) 1 else 0
     }
 
+    fun isFavoriteSelected(): Boolean {
+        return _favorite.value == 1
+    }
+
     fun updateFavorite(cityId: Int, isFavorite: Boolean) = viewModelScope.launch {
         repository.updateFavorite(cityId, isFavorite)
         _refreshTrigger.emit(Unit)
