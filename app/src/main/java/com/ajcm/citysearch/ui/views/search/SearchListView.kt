@@ -22,6 +22,7 @@ import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.flowWithLifecycle
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.ajcm.citysearch.ui.views.SharedLocationViewModel
 import com.ajcm.citysearch.ui.views.UiState
 import com.ajcm.citysearch.ui.views.components.CityItemView
 import com.ajcm.citysearch.ui.views.components.EmptyCitiesView
@@ -35,6 +36,7 @@ import org.koin.androidx.compose.koinViewModel
 fun SearchListView(
     modifier: Modifier = Modifier,
     viewModel: SearchViewModel = koinViewModel(),
+    sharedViewModel: SharedLocationViewModel,
     onCitySelected: (Int) -> Unit
 ) {
     val citiesState by viewModel.citiesState.collectAsState()
@@ -59,6 +61,7 @@ fun SearchListView(
                 CitiesListView(
                     modifier = modifier,
                     viewModel = viewModel,
+                    sharedViewModel = sharedViewModel,
                     onCitySelected = onCitySelected
                 )
             }
@@ -74,12 +77,14 @@ fun SearchListView(
 fun CitiesListView(
     modifier: Modifier = Modifier,
     viewModel: SearchViewModel,
+    sharedViewModel: SharedLocationViewModel,
     onCitySelected: (Int) -> Unit
 ) {
     val cities = viewModel.cities.collectAsLazyPagingItems()
     val lifecycle = LocalLifecycleOwner.current
 
     LaunchedEffect(Unit) {
+        sharedViewModel.updateSelectedCity(null)
         viewModel.refreshTrigger
             .flowWithLifecycle(lifecycle.lifecycle)
             .collect {
@@ -116,6 +121,7 @@ fun CitiesListView(
                     city = city,
                     onClick = {
                         onCitySelected(city.id)
+                        sharedViewModel.updateSelectedCity(city)
                     },
                     onFavoriteClicked = {
                         viewModel.updateFavorite(city.id, !city.favorite)

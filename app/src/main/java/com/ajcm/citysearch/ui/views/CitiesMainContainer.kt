@@ -17,6 +17,7 @@ import com.ajcm.citysearch.ui.views.search.SearchListView
 @Composable
 fun CitiesMainContainer(
     navController: NavHostController = rememberNavController(),
+    sharedLocationViewModel: SharedLocationViewModel
 ) {
     NavHost(
         modifier = Modifier
@@ -27,6 +28,7 @@ fun CitiesMainContainer(
     ) {
         composable<Search> { _ ->
             SearchListView(
+                sharedViewModel = sharedLocationViewModel,
                 onCitySelected = { cityId ->
                     navController.navigate(CityDetails(cityId))
                 }

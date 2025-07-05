@@ -1,5 +1,6 @@
 package com.ajcm.citysearch.di
 
+import com.ajcm.citysearch.ui.views.SharedLocationViewModel
 import com.ajcm.citysearch.ui.views.details.CityDetailsViewModel
 import com.ajcm.citysearch.ui.views.search.SearchViewModel
 import com.ajcm.data_source_manager.repositoryModule
@@ -27,6 +28,10 @@ val appModule = module {
         CityDetailsViewModel(
             repository = get()
         )
+    }
+
+    viewModel {
+        SharedLocationViewModel()
     }
 
     loadKoinModules(
