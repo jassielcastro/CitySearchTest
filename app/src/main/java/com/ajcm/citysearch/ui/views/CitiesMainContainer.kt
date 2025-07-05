@@ -8,7 +8,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
+import com.ajcm.citysearch.ui.CityDetails
 import com.ajcm.citysearch.ui.Search
+import com.ajcm.citysearch.ui.views.details.CityDetailsView
 import com.ajcm.citysearch.ui.views.search.SearchListView
 
 @Composable
@@ -23,7 +26,20 @@ fun CitiesMainContainer(
         startDestination = Search
     ) {
         composable<Search> { _ ->
-            SearchListView()
+            SearchListView(
+                onCitySelected = { cityId ->
+                    navController.navigate(CityDetails(cityId))
+                }
+            )
+        }
+
+        composable<CityDetails> { navBackStackEntry ->
+            val details = navBackStackEntry.toRoute<CityDetails>()
+            CityDetailsView(
+                cityId = details.cityId,
+            ) {
+                navController.navigateUp()
+            }
         }
     }
 }

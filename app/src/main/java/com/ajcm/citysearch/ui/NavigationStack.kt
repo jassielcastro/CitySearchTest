@@ -7,5 +7,5 @@ data object Search
 
 @Serializable
 data class CityDetails(
-    val cityId: String
+    val cityId: Int
 )
