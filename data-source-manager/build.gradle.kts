@@ -45,6 +45,7 @@ dependencies {
     implementation(libs.koin.core)
     implementation(libs.moshi)
     ksp(libs.moshi.code.gen)
+    implementation(libs.room.paging)
 
     testImplementation(libs.junit)
     testImplementation(libs.room.testing)

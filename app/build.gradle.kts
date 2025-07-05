@@ -4,6 +4,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.serialization)
+}
 
 val localProps = Properties().apply {
     load(rootProject.file("local.properties").inputStream())
@@ -60,9 +62,15 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.navigation)
     implementation(libs.koin.android.compose)
     implementation(libs.moshi)
     implementation(libs.moshi.kotlin)
+    implementation(libs.kotlin.serialization)
+    implementation(libs.google.maps)
+    implementation(libs.google.maps.services)
+    implementation(libs.room.paging)
+    implementation(libs.room.paging.compose)
 
     testImplementation(libs.junit)
 

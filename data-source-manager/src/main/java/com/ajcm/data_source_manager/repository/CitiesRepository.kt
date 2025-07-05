@@ -1,16 +1,23 @@
 package com.ajcm.data_source_manager.repository
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.map
 import com.ajcm.data_source_manager.client.CitiesGistService
 import com.ajcm.data_source_manager.repository.mapper.mapToDomain
 import com.ajcm.data_source_manager.repository.mapper.mapToEntity
+import com.ajcm.data_source_manager.repository.model.City
 import com.ajcm.storage.CitiesDAO
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 class CitiesRepository(
     private val citiesGistService: CitiesGistService,
     private val citiesDao: CitiesDAO
 ) {
 
-    suspend fun isCitiesPopulated(): Boolean {
+    suspend fun areCitiesPopulated(): Boolean {
         return getCitiesBy(
             limit = 1,
             offset = 0
@@ -26,35 +33,46 @@ class CitiesRepository(
         it.mapToDomain()
     }
 
+    fun getCitiesBy(
+        favorite: Int,
+        prefix: String = "",
+    ): Flow<PagingData<City>> {
+        return Pager(
+            config = PagingConfig(pageSize = 20),
+            pagingSourceFactory = {
+                citiesDao.getCitiesBy(favorite, prefix)
+            }
+        ).flow.map {
+            it.map { cityEntity ->
+                cityEntity.mapToDomain()
+            }
+        }
+    }
+
     suspend fun getCityById(cityId: Int) = citiesDao.getCityById(cityId)?.mapToDomain()
 
     suspend fun updateFavorite(cityId: Int, isFavorite: Boolean) {
         citiesDao.updateFavorite(cityId, isFavorite)
     }
 
-    suspend fun fetchCitiesFromRemote(): ResponseStatus<Unit> {
+    suspend fun fetchCitiesFromRemote(): Result<Unit> {
         try {
             val cities = citiesGistService.getCitiesData(CITIES_URL)
             if (cities.isSuccessful) {
                 val result = cities.body()
                 if (result != null && result.isNotEmpty()) {
                     citiesDao.insertCities(result.map { it.mapToEntity() })
-                    return ResponseStatus.Success(Unit)
+                    return Result.success(Unit)
                 }
             }
-            return ResponseStatus.Error
+            return Result.failure(NoSuchElementException())
         } catch (_: Exception) {
-            return ResponseStatus.Error
+            return Result.failure(NoSuchElementException())
         }
     }
 
     companion object {
         private const val CITIES_URL =
             "dce8843a8edbe0b0018b32e137bc2b3a/raw/0996accf70cb0ca0e16f9a99e0ee185fafca7af1/cities.json"
-    }
-
-    sealed class ResponseStatus<out T> {
-        data class Success<T>(val result: T) : ResponseStatus<T>()
-        data object Error : ResponseStatus<Nothing>()
     }
 }

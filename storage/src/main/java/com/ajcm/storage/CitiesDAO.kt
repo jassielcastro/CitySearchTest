@@ -1,5 +1,6 @@
 package com.ajcm.storage
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -31,6 +32,19 @@ interface CitiesDAO {
         limit: Int,
         offset: Int
     ): List<City>
+
+    @Query(
+        """
+        SELECT * FROM ${City.TABLE_NAME}
+        WHERE (:favorite = 0 OR favorite = 1)
+          AND (:prefix == '' OR name LIKE :prefix || '%' COLLATE NOCASE)
+        ORDER BY name ASC, country ASC
+    """
+    )
+    fun getCitiesBy(
+        favorite: Int,
+        prefix: String,
+    ): PagingSource<Int, City>
 
     /**
      * Get a city by its ID.
