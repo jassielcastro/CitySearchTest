@@ -21,8 +21,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.ajcm.citysearch.R
 import com.ajcm.data_source_manager.repository.model.City
 import com.ajcm.data_source_manager.repository.model.Coordinate
 
@@ -51,14 +55,17 @@ fun CityItemView(
             verticalAlignment = Alignment.CenterVertically
         ) {
 
-            Box(
+            Icon(
                 modifier = Modifier
                     .padding(8.dp)
                     .size(48.dp)
-                    .background(MaterialTheme.colorScheme.onSurface)
+                    .rotate((city.id % 4) * 90f),
+                imageVector = ImageVector.vectorResource(R.drawable.ic_map_square),
+                contentDescription = "Location Icon",
+                tint = MaterialTheme.colorScheme.onSurface
             )
 
-            Column (
+            Column(
                 modifier = Modifier
                     .fillMaxWidth(0.85f),
                 verticalArrangement = Arrangement.SpaceBetween,
@@ -87,7 +94,7 @@ fun CityItemView(
                 }
             }
 
-            IconButton (
+            IconButton(
                 onClick = { onFavoriteClicked(city.id) },
             ) {
                 Icon(
