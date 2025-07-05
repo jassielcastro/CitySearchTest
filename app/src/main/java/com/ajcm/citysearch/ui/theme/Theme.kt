@@ -14,7 +14,7 @@ private val DarkColorScheme = darkColorScheme(
     outline = OutlineNight,
     surface = SurfaceNight,
     onSurface = PrimaryTextNight,
-    onSurfaceVariant = SecondaryTextNight,
+    surfaceVariant = SurfaceVariantNight,
 )
 
 private val LightColorScheme = lightColorScheme(
@@ -25,7 +25,7 @@ private val LightColorScheme = lightColorScheme(
     outline = OutlineLight,
     surface = SurfaceLight,
     onSurface = PrimaryTextLight,
-    onSurfaceVariant = SecondaryTextLight,
+    surfaceVariant = SurfaceVariantLight,
 )
 
 @Composable

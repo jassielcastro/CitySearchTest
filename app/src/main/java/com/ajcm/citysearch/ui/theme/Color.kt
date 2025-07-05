@@ -12,7 +12,7 @@ val Pink80 = Color(0xFFEFB8C8)
 val OutlineLight = Color(0xFF000000)
 val SurfaceLight = Color(0xFFFFFFFF)
 val PrimaryTextLight = Color(0xFF000000)
-val SecondaryTextLight = Color(0xFF000000)
+val SurfaceVariantLight = Color(0xFFD36851)
 
 /**
  * Night colors
@@ -24,4 +24,4 @@ val Pink40 = Color(0xFF7D5260)
 val OutlineNight = Color(0xFFFFFFFF)
 val SurfaceNight = Color(0xFF000000)
 val PrimaryTextNight = Color(0xFFFFFFFF)
-val SecondaryTextNight = Color(0xFFFFFFFF)
+val SurfaceVariantNight = Color(0xFFFFFFFF)

@@ -27,6 +27,7 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ajcm.citysearch.R
+import com.ajcm.citysearch.ui.theme.CitySearchTheme
 import com.ajcm.data_source_manager.repository.model.City
 import com.ajcm.data_source_manager.repository.model.Coordinate
 
@@ -42,7 +43,7 @@ fun CityItemView(
             .fillMaxWidth(),
         onClick = { onClick(city.id) },
         shadowElevation = 4.dp,
-        border = BorderStroke(2.dp, MaterialTheme.colorScheme.onSurface),
+        border = BorderStroke(2.dp, MaterialTheme.colorScheme.outline),
         shape = MaterialTheme.shapes.medium,
         color = MaterialTheme.colorScheme.surface,
         tonalElevation = 2.dp
@@ -62,7 +63,7 @@ fun CityItemView(
                     .rotate((city.id % 4) * 90f),
                 imageVector = ImageVector.vectorResource(R.drawable.ic_map_square),
                 contentDescription = "Location Icon",
-                tint = MaterialTheme.colorScheme.onSurface
+                tint = MaterialTheme.colorScheme.surfaceVariant
             )
 
             Column(
@@ -84,12 +85,13 @@ fun CityItemView(
                             .size(12.dp),
                         imageVector = Icons.Default.LocationOn,
                         contentDescription = "Location Icon",
-                        tint = MaterialTheme.colorScheme.onSurface
+                        tint = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.75f)
                     )
 
                     Text(
                         text = "${city.coordinates.latitude}, ${city.coordinates.longitude}",
                         style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.75f),
                     )
                 }
             }
@@ -102,7 +104,7 @@ fun CityItemView(
                         .size(24.dp),
                     imageVector = if (city.favorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
                     contentDescription = "Favorite Icon",
-                    tint = MaterialTheme.colorScheme.onSurface
+                    tint = MaterialTheme.colorScheme.surfaceVariant
                 )
             }
         }
@@ -112,15 +114,17 @@ fun CityItemView(
 @Preview
 @Composable
 fun CityItemViewPreview() {
-    CityItemView(
-        city = City(
-            countryCode = "US",
-            cityName = "New York",
-            id = 1,
-            coordinates = Coordinate(latitude = 40.7128, longitude = -74.0060),
-            favorite = false
-        ),
-        onClick = {},
-        onFavoriteClicked = {}
-    )
+    CitySearchTheme {
+        CityItemView(
+            city = City(
+                countryCode = "US",
+                cityName = "New York",
+                id = 1,
+                coordinates = Coordinate(latitude = 40.7128, longitude = -74.0060),
+                favorite = false
+            ),
+            onClick = {},
+            onFavoriteClicked = {}
+        )
+    }
 }

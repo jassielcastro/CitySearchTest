@@ -5,9 +5,12 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
@@ -19,6 +22,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -31,6 +35,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ajcm.citysearch.R
+import com.ajcm.citysearch.ui.theme.CitySearchTheme
 
 @Composable
 fun SearchBarView(
@@ -48,28 +53,35 @@ fun SearchBarView(
         SearchFieldBarView(
             modifier = Modifier
                 .padding(vertical = 8.dp)
-                .padding(start = 16.dp)
+                .padding(start = 16.dp, end = 8.dp)
                 .fillMaxWidth(0.82f),
             onSearch = onSearch
         )
 
-        IconButton(
-            onClick = {
-                filterFavorites = !filterFavorites
-                onFilterFavorites(filterFavorites)
-            },
+        Surface (
+            modifier = Modifier
+                .size(52.dp),
+            color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.25f),
+            shape = MaterialTheme.shapes.medium,
         ) {
-            Icon(
-                modifier = Modifier
-                    .size(24.dp),
-                imageVector = if (filterFavorites) {
-                    Icons.Default.Favorite
-                } else {
-                    Icons.Default.FavoriteBorder
+            IconButton(
+                onClick = {
+                    filterFavorites = !filterFavorites
+                    onFilterFavorites(filterFavorites)
                 },
-                contentDescription = "Clear Icon",
-                tint = MaterialTheme.colorScheme.onSurface
-            )
+            ) {
+                Icon(
+                    modifier = Modifier
+                        .size(24.dp),
+                    imageVector = if (filterFavorites) {
+                        Icons.Default.Favorite
+                    } else {
+                        Icons.Default.FavoriteBorder
+                    },
+                    contentDescription = "Clear Icon",
+                    tint = MaterialTheme.colorScheme.surfaceVariant
+                )
+            }
         }
     }
 }
@@ -100,7 +112,7 @@ fun SearchFieldBarView(
             Box(
                 modifier = Modifier
                     .size(52.dp)
-                    .background(MaterialTheme.colorScheme.onSurface),
+                    .background(MaterialTheme.colorScheme.surfaceVariant),
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
@@ -111,6 +123,13 @@ fun SearchFieldBarView(
                     tint = MaterialTheme.colorScheme.surface
                 )
             }
+
+            VerticalDivider(
+                modifier = Modifier
+                    .height(52.dp),
+                thickness = 2.dp,
+                color = MaterialTheme.colorScheme.onSurface
+            )
 
             BasicTextField(
                 modifier = Modifier
@@ -163,9 +182,11 @@ fun SearchFieldBarView(
 @Preview(showBackground = true)
 @Composable
 fun SearchBarViewPreview() {
-    SearchBarView(
-        modifier = Modifier.fillMaxWidth(),
-        onSearch = {},
-        onFilterFavorites = {}
-    )
+    CitySearchTheme {
+        SearchBarView(
+            modifier = Modifier.fillMaxWidth(),
+            onSearch = {},
+            onFilterFavorites = {}
+        )
+    }
 }
