@@ -44,7 +44,7 @@ class CitiesRepositoryTest {
     fun `given app start up, when call isCitiesPopulated, validate the empty value`() {
         coEvery { citiesDao.getCitiesBy(any(), any(), any(), any()) } returns emptyList()
 
-        val isPopulated = runBlocking { citiesRepository.isCitiesPopulated() }
+        val isPopulated = runBlocking { citiesRepository.areCitiesPopulated() }
 
         Truth.assertThat(isPopulated).isFalse()
     }
@@ -53,7 +53,7 @@ class CitiesRepositoryTest {
     fun `given app start up, when call isCitiesPopulated, validate the populated value`() {
         coEvery { citiesDao.getCitiesBy(any(), any(), any(), any()) } returns sampleCities()
 
-        val isPopulated = runBlocking { citiesRepository.isCitiesPopulated() }
+        val isPopulated = runBlocking { citiesRepository.areCitiesPopulated() }
 
         Truth.assertThat(isPopulated).isTrue()
     }
@@ -141,8 +141,7 @@ class CitiesRepositoryTest {
             citiesRepository.fetchCitiesFromRemote()
         }
 
-        Truth.assertThat(result)
-            .isInstanceOf(CitiesRepository.ResponseStatus.Success::class.java)
+        Truth.assertThat(result.isSuccess).isTrue()
     }
 
     @Test
@@ -157,8 +156,7 @@ class CitiesRepositoryTest {
             citiesRepository.fetchCitiesFromRemote()
         }
 
-        Truth.assertThat(result)
-            .isInstanceOf(CitiesRepository.ResponseStatus.Error::class.java)
+        Truth.assertThat(result.isFailure).isTrue()
     }
 
     @Test
@@ -173,8 +171,7 @@ class CitiesRepositoryTest {
             citiesRepository.fetchCitiesFromRemote()
         }
 
-        Truth.assertThat(result)
-            .isInstanceOf(CitiesRepository.ResponseStatus.Error::class.java)
+        Truth.assertThat(result.isFailure).isTrue()
     }
 
     private fun sampleCities() = listOf(
