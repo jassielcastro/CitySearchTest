@@ -47,7 +47,7 @@ class SearchViewModel(
     }.debounce(100)
         .flatMapLatest { (favorite, prefix) ->
             repository.getCitiesBy(favorite, prefix).cachedIn(viewModelScope)
-        }
+        }.cachedIn(viewModelScope)
 
     fun loadCities() = viewModelScope.launch {
         _citiesState.value = UiState.Loading
