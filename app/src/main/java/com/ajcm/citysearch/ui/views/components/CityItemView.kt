@@ -39,14 +39,10 @@ fun CityItemView(
 ) {
     Surface(
         modifier = Modifier
-            .padding(vertical = 8.dp, horizontal = 16.dp)
+            .padding(vertical = 4.dp, horizontal = 8.dp)
             .fillMaxWidth(),
         onClick = { onClick(city.id) },
-        shadowElevation = 4.dp,
-        border = BorderStroke(2.dp, MaterialTheme.colorScheme.outline),
-        shape = MaterialTheme.shapes.medium,
-        color = MaterialTheme.colorScheme.surface,
-        tonalElevation = 2.dp
+        color = MaterialTheme.colorScheme.background,
     ) {
         Row(
             modifier = Modifier
@@ -111,7 +107,7 @@ fun CityItemView(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun CityItemViewPreview() {
     CitySearchTheme {

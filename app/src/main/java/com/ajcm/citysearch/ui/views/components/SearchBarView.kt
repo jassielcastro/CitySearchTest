@@ -97,7 +97,7 @@ fun SearchFieldBarView(
         shadowElevation = 4.dp,
         border = BorderStroke(2.dp, MaterialTheme.colorScheme.onSurface),
         shape = MaterialTheme.shapes.medium,
-        color = MaterialTheme.colorScheme.surface,
+        color = MaterialTheme.colorScheme.background,
         tonalElevation = 2.dp
     ) {
 
@@ -149,7 +149,8 @@ fun SearchFieldBarView(
                         ) {
                             Text(
                                 text = stringResource(R.string.search_hint),
-                                style = MaterialTheme.typography.bodyLarge
+                                style = MaterialTheme.typography.bodyLarge,
+                                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)
                             )
                         }
                     }
