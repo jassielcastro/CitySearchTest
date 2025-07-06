@@ -1,5 +1,7 @@
 package com.ajcm.citysearch.ui.views.map
 
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -19,13 +21,16 @@ import com.google.maps.android.compose.MapUiSettings
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberCameraPositionState
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun MapContainerView(
     modifier: Modifier = Modifier,
-    sharedViewModel: SharedLocationViewModel,
     onZoomToCity: () -> Unit
 ) {
+    val sharedViewModel: SharedLocationViewModel = koinViewModel(
+        viewModelStoreOwner = LocalActivity.current as ComponentActivity
+    )
     val selectedCity by sharedViewModel.selectedCity.collectAsState()
 
     val cameraPositionState = rememberCameraPositionState()

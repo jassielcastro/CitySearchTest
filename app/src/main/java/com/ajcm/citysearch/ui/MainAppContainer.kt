@@ -18,10 +18,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import com.ajcm.citysearch.ui.views.CitiesMainContainer
-import com.ajcm.citysearch.ui.views.SharedLocationViewModel
 import com.ajcm.citysearch.ui.views.map.MapContainerView
 import kotlinx.coroutines.launch
-import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -29,8 +27,6 @@ fun MainAppContainer() {
     val scaffoldState = rememberBottomSheetScaffoldState()
     val coroutineScope = rememberCoroutineScope()
     val isKeyboardOpen by keyboardAsState()
-
-    val sharedViewModel: SharedLocationViewModel = koinViewModel()
 
     LaunchedEffect(isKeyboardOpen) {
         if (isKeyboardOpen) {
@@ -48,14 +44,11 @@ fun MainAppContainer() {
         sheetShadowElevation = 8.dp,
         sheetPeekHeight = 320.dp,
         sheetContent = {
-            CitiesMainContainer(
-                sharedLocationViewModel = sharedViewModel
-            )
+            CitiesMainContainer()
         },
     ) { _ ->
         MapContainerView(
             modifier = Modifier.fillMaxSize(),
-            sharedViewModel = sharedViewModel
         ) {
             coroutineScope.launch {
                 scaffoldState.bottomSheetState.partialExpand()

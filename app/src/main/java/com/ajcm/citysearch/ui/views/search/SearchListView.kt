@@ -1,5 +1,7 @@
 package com.ajcm.citysearch.ui.views.search
 
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.LocalActivity
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.ScrollableDefaults
@@ -36,9 +38,11 @@ import org.koin.androidx.compose.koinViewModel
 fun SearchListView(
     modifier: Modifier = Modifier,
     viewModel: SearchViewModel = koinViewModel(),
-    sharedViewModel: SharedLocationViewModel,
     onCitySelected: (Int) -> Unit
 ) {
+    val sharedViewModel: SharedLocationViewModel = koinViewModel(
+        viewModelStoreOwner = LocalActivity.current as ComponentActivity
+    )
     val citiesState by viewModel.citiesState.collectAsState()
 
     LaunchedEffect(Unit) {
