@@ -34,7 +34,7 @@ fun MapContainerView(
     val selectedCity by sharedViewModel.selectedCity.collectAsState()
 
     val cameraPositionState = rememberCameraPositionState()
-    var uiSettings by remember { mutableStateOf(MapUiSettings(zoomControlsEnabled = true)) }
+    var uiSettings by remember { mutableStateOf(MapUiSettings(zoomControlsEnabled = false)) }
     var properties by remember {
         mutableStateOf(MapProperties(mapType = MapType.NORMAL))
     }
