@@ -2,14 +2,14 @@ package com.ajcm.data_source_manager.repository.mapper
 
 import com.ajcm.data_source_manager.client.model.SunInfoDto
 import com.ajcm.data_source_manager.client.model.TempInfoDto
-import com.ajcm.data_source_manager.client.model.WaterDto
+import com.ajcm.data_source_manager.client.model.WeatherDto
 import com.ajcm.data_source_manager.client.model.WeatherDescriptionDto
 import com.ajcm.data_source_manager.repository.model.CityWeatherData
 import com.ajcm.data_source_manager.repository.model.SunInfoData
 import com.ajcm.data_source_manager.repository.model.TempInfoData
 import com.ajcm.data_source_manager.repository.model.WeatherDescriptionData
 
-fun WaterDto.toData(
+fun WeatherDto.toData(
     images: List<String> = emptyList(),
 ): CityWeatherData {
     return CityWeatherData(

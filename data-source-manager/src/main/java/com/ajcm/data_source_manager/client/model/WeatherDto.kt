@@ -4,7 +4,7 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class WaterDto(
+data class WeatherDto(
     @Json(name = "timezone")
     val timezone: Int,
     @Json(name = "weather")
