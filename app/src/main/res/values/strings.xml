@@ -10,4 +10,16 @@
     <string name="loading_hint_2">Waking up sleepy towns…</string>
     <string name="loading_hint_3">Counting pigeons in the plaza…</string>
     <string name="loading_hint_4">Plotting cities on the fun map…</string>
+
+    <string name="city_details_temperature_title">Local temperature</string>
+    <string name="city_details_sun_title">Sun movement</string>
+    <string name="city_intro_title">Get to know %1$s!</string>
+    <string name="sun_weather_text">
+        The sun rises at %1$s am and sets at %2$s pm. Meanwhile, the sky is feeling %3$s with a touch of %4$s. Sounds like a mood!
+    </string>
+    <string name="city_temperature">%1$s: %2$s °C</string>
+    <string name="city_temperature_current">Current</string>
+    <string name="city_temperature_feels">Feels</string>
+    <string name="city_temperature_max">Max</string>
+    <string name="city_temperature_min">Min</string>
 </resources>

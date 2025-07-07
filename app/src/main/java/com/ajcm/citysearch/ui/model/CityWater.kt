@@ -4,33 +4,29 @@ import androidx.compose.runtime.Immutable
 
 @Immutable
 data class CityWater(
-    val timezoneOffset: Int,
-    val currentWater: CurrentWater,
+    val timezone: Int,
+    val currentWeather: List<WeatherDescription>,
+    val tempInfo: TempInfo,
+    val sunInfo: SunInfo,
+    val images: List<String>,
 )
 
 @Immutable
-data class CurrentWater(
-    val sunrise: Int,
-    val sunset: Int,
+data class TempInfo(
     val temperature: Float,
     val feelsLike: Float,
-    val humidity: Int,
-    val windSpeed: Float,
-    val waterTime: List<WaterTime>,
-    val alerts: List<Alerts>,
+    val tempMin: Float,
+    val tempMax: Float,
 )
 
 @Immutable
-data class WaterTime(
+data class WeatherDescription(
     val main: String,
     val description: String,
 )
 
 @Immutable
-data class Alerts(
-    val sender: String,
-    val event: String,
-    val start: Int,
-    val end: Int,
-    val description: String,
+data class SunInfo(
+    val sunrise: Int,
+    val sunset: Int,
 )

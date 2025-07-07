@@ -1,39 +1,35 @@
 package com.ajcm.citysearch.ui.mapper
 
-import com.ajcm.citysearch.ui.model.Alerts
 import com.ajcm.citysearch.ui.model.CityWater
-import com.ajcm.citysearch.ui.model.CurrentWater
-import com.ajcm.citysearch.ui.model.WaterTime
-import com.ajcm.data_source_manager.repository.model.AlertsData
-import com.ajcm.data_source_manager.repository.model.CityWaterData
-import com.ajcm.data_source_manager.repository.model.CurrentWaterData
-import com.ajcm.data_source_manager.repository.model.WaterTimeData
+import com.ajcm.citysearch.ui.model.SunInfo
+import com.ajcm.citysearch.ui.model.TempInfo
+import com.ajcm.citysearch.ui.model.WeatherDescription
+import com.ajcm.data_source_manager.repository.model.CityWeatherData
+import com.ajcm.data_source_manager.repository.model.SunInfoData
+import com.ajcm.data_source_manager.repository.model.TempInfoData
+import com.ajcm.data_source_manager.repository.model.WeatherDescriptionData
 
-fun CityWaterData.toCityWater() = CityWater(
-    timezoneOffset = timezoneOffset,
-    currentWater = currentWater.toCurrentWater()
+fun CityWeatherData.toCityWater() = CityWater(
+    timezone = timezone,
+    currentWeather = currentWeather.map { it.toCurrentWater() },
+    tempInfo = tempInfo.toTempInfo(),
+    sunInfo = sunInfo.toSunInfo(),
+    images = images
 )
 
-fun CurrentWaterData.toCurrentWater() = CurrentWater(
-    sunrise = sunrise,
-    sunset = sunset,
+fun WeatherDescriptionData.toCurrentWater() = WeatherDescription(
+    main = main,
+    description = description,
+)
+
+fun TempInfoData.toTempInfo() = TempInfo(
     temperature = temperature,
     feelsLike = feelsLike,
-    humidity = humidity,
-    windSpeed = windSpeed,
-    waterTime = waterTime.map { it.toWaterTime() },
-    alerts = alerts.map { it.toAlert() }
+    tempMin = tempMin,
+    tempMax = tempMax
 )
 
-fun WaterTimeData.toWaterTime() = WaterTime(
-    main = main,
-    description = description
-)
-
-fun AlertsData.toAlert() = Alerts(
-    sender = sender,
-    event = event,
-    start = start,
-    end = end,
-    description = description
+fun SunInfoData.toSunInfo() = SunInfo(
+    sunrise = sunrise,
+    sunset = sunset
 )

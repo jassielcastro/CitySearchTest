@@ -74,6 +74,8 @@ dependencies {
     implementation(libs.google.maps.services)
     implementation(libs.room.paging)
     implementation(libs.room.paging.compose)
+    implementation(libs.coil)
+    implementation(libs.coil.network)
 
     testImplementation(libs.junit)
 

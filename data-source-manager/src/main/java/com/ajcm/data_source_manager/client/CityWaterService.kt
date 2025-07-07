@@ -6,11 +6,10 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface CityWaterService {
-    @GET("data/3.0/onecall")
+    @GET("data/2.5/weather")
     suspend fun getCurrentCityWaterBy(
         @Query("lat") latitude: Double,
         @Query("lon") longitude: Double,
-        @Query("exclude") exclude: String = "minutely,hourly,daily",
         @Query("appid") apiKey: String,
         @Query("units") units: String = "metric"
     ): Response<WaterDto>

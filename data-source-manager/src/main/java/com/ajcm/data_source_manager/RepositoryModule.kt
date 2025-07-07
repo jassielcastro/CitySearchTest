@@ -3,7 +3,7 @@ package com.ajcm.data_source_manager
 import com.ajcm.data_source_manager.client.CitiesGistService
 import com.ajcm.data_source_manager.client.CityWaterService
 import com.ajcm.data_source_manager.repository.CitiesRepository
-import com.ajcm.data_source_manager.repository.CityWaterRepository
+import com.ajcm.data_source_manager.repository.CityWeatherRepository
 import com.ajcm.storage.CitiesDAO
 import com.squareup.moshi.Moshi
 import okhttp3.Interceptor
@@ -59,8 +59,8 @@ val repositoryModule = module {
         )
     }
 
-    single<CityWaterRepository> {
-        CityWaterRepository(
+    single<CityWeatherRepository> {
+        CityWeatherRepository(
             cityWaterService = get<CityWaterService>(),
         )
     }

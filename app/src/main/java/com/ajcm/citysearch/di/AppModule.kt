@@ -26,7 +26,8 @@ val appModule = module {
 
     viewModel {
         CityDetailsViewModel(
-            repository = get()
+            repository = get(),
+            waterRepository = get()
         )
     }
 
