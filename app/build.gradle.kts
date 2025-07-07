@@ -25,6 +25,9 @@ android {
         val mapsKey = localProps.getProperty("googleMapsApiKey")
         manifestPlaceholders.put("MAPS_API_KEY", mapsKey)
 
+        val weatherApiKey = localProps.getProperty("weatherMapApiKey")
+        buildConfigField(type = "String", name = "WEATHER_API_KEY", value = "\"$weatherApiKey\"")
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
