@@ -5,7 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.ajcm.storage.data.City
+import com.ajcm.storage.data.CityTable
 
 @Dao
 interface CitiesDAO {
@@ -19,7 +19,7 @@ interface CitiesDAO {
      */
     @Query(
         """
-        SELECT * FROM ${City.TABLE_NAME}
+        SELECT * FROM ${CityTable.TABLE_NAME}
         WHERE (:favorite = 0 OR favorite = 1)
           AND (:prefix == '' OR name LIKE :prefix || '%' COLLATE NOCASE)
         ORDER BY name ASC, country ASC
@@ -31,11 +31,11 @@ interface CitiesDAO {
         prefix: String,
         limit: Int,
         offset: Int
-    ): List<City>
+    ): List<CityTable>
 
     @Query(
         """
-        SELECT * FROM ${City.TABLE_NAME}
+        SELECT * FROM ${CityTable.TABLE_NAME}
         WHERE (:favorite = 0 OR favorite = 1)
           AND (:prefix == '' OR name LIKE :prefix || '%' COLLATE NOCASE)
         ORDER BY name ASC, country ASC
@@ -44,7 +44,7 @@ interface CitiesDAO {
     fun getCitiesBy(
         favorite: Int,
         prefix: String,
-    ): PagingSource<Int, City>
+    ): PagingSource<Int, CityTable>
 
     /**
      * Get a city by its ID.
@@ -52,15 +52,15 @@ interface CitiesDAO {
      */
     @Query(
         """
-        SELECT * FROM ${City.TABLE_NAME}
+        SELECT * FROM ${CityTable.TABLE_NAME}
         WHERE id = :cityId
     """
     )
-    suspend fun getCityById(cityId: Int): City?
+    suspend fun getCityById(cityId: Int): CityTable?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertCities(cities: List<City>)
+    suspend fun insertCities(cities: List<CityTable>)
 
-    @Query("UPDATE ${City.TABLE_NAME} SET favorite = :isFavorite WHERE id = :cityId")
+    @Query("UPDATE ${CityTable.TABLE_NAME} SET favorite = :isFavorite WHERE id = :cityId")
     suspend fun updateFavorite(cityId: Int, isFavorite: Boolean)
 }

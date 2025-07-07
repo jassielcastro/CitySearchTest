@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
@@ -29,12 +28,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.ajcm.citysearch.ui.model.City
+import com.ajcm.citysearch.ui.model.Coordinate
 import com.ajcm.citysearch.ui.views.UiState
 import com.ajcm.citysearch.ui.views.components.ErrorView
 import com.ajcm.citysearch.ui.views.components.IdleView
 import com.ajcm.citysearch.ui.views.components.LoadCityView
-import com.ajcm.data_source_manager.repository.model.City
-import com.ajcm.data_source_manager.repository.model.Coordinate
 import org.koin.androidx.compose.koinViewModel
 
 @Composable

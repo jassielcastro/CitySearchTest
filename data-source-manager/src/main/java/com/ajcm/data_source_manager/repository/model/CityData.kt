@@ -1,9 +1,9 @@
 package com.ajcm.data_source_manager.repository.model
 
-data class City(
+data class CityData(
     val countryCode: String,
     val cityName: String,
     val id: Int,
-    val coordinates: Coordinate,
+    val coordinates: CoordinateData,
     val favorite: Boolean
 )

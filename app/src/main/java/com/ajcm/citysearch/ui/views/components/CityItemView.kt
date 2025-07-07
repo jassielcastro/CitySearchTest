@@ -1,9 +1,6 @@
 package com.ajcm.citysearch.ui.views.components
 
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -27,9 +24,9 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ajcm.citysearch.R
+import com.ajcm.citysearch.ui.model.City
+import com.ajcm.citysearch.ui.model.Coordinate
 import com.ajcm.citysearch.ui.theme.CitySearchTheme
-import com.ajcm.data_source_manager.repository.model.City
-import com.ajcm.data_source_manager.repository.model.Coordinate
 
 @Composable
 fun CityItemView(

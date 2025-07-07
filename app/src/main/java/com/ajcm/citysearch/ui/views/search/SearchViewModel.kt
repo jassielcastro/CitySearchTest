@@ -4,9 +4,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import androidx.paging.map
+import com.ajcm.citysearch.ui.mapper.toCity
+import com.ajcm.citysearch.ui.model.City
 import com.ajcm.citysearch.ui.views.UiState
 import com.ajcm.data_source_manager.repository.CitiesRepository
-import com.ajcm.data_source_manager.repository.model.City
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
@@ -18,6 +20,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 class SearchViewModel(
@@ -46,7 +49,9 @@ class SearchViewModel(
         favorite to prefix
     }.debounce(100)
         .flatMapLatest { (favorite, prefix) ->
-            repository.getCitiesBy(favorite, prefix).cachedIn(viewModelScope)
+            repository.getCitiesBy(favorite, prefix).map {
+                it.map { it.toCity() }
+            }
         }.cachedIn(viewModelScope)
 
     fun loadCities() = viewModelScope.launch {

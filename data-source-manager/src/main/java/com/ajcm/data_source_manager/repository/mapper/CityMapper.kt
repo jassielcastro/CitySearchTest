@@ -2,13 +2,13 @@ package com.ajcm.data_source_manager.repository.mapper
 
 import com.ajcm.data_source_manager.client.model.CityDto
 import com.ajcm.data_source_manager.client.model.CoordinateDto
-import com.ajcm.storage.data.City as CityEntity
-import com.ajcm.storage.data.Coordinate as CoordinateEntity
-import com.ajcm.data_source_manager.repository.model.City
-import com.ajcm.data_source_manager.repository.model.Coordinate
+import com.ajcm.storage.data.CityTable as CityEntity
+import com.ajcm.storage.data.CoordinateEmb as CoordinateEntity
+import com.ajcm.data_source_manager.repository.model.CityData
+import com.ajcm.data_source_manager.repository.model.CoordinateData
 
-fun CityEntity.mapToDomain(): City {
-    return City(
+fun CityEntity.mapToDomain(): CityData {
+    return CityData(
         countryCode = this.country,
         cityName = this.name,
         id = this.id,
@@ -17,8 +17,8 @@ fun CityEntity.mapToDomain(): City {
     )
 }
 
-fun CoordinateEntity.mapToDomain(): Coordinate {
-    return Coordinate(
+fun CoordinateEntity.mapToDomain(): CoordinateData {
+    return CoordinateData(
         latitude = this.latitude,
         longitude = this.longitude
     )

@@ -1,6 +1,6 @@
 package com.ajcm.storage.data
 
-data class Coordinate(
+data class CoordinateEmb(
     val longitude: Double,
     val latitude: Double
 )

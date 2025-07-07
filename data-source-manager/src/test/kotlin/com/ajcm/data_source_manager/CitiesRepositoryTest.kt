@@ -5,8 +5,8 @@ import com.ajcm.data_source_manager.client.model.CityDto
 import com.ajcm.data_source_manager.client.model.CoordinateDto
 import com.ajcm.data_source_manager.repository.CitiesRepository
 import com.ajcm.storage.CitiesDAO
-import com.ajcm.storage.data.City
-import com.ajcm.storage.data.Coordinate
+import com.ajcm.storage.data.CityTable
+import com.ajcm.storage.data.CoordinateEmb
 import com.google.common.truth.Truth
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
@@ -175,12 +175,12 @@ class CitiesRepositoryTest {
     }
 
     private fun sampleCities() = listOf(
-        City(707860, "UA", "Hurzuf", Coordinate(34.28, 44.55), favorite = true),
-        City(708546, "UA", "Holubynka", Coordinate(34.28, 44.55), favorite = true),
-        City(1862845, "JP", "Higashi-asahimachi", Coordinate(34.28, 44.55), favorite = false),
-        City(707861, "RU", "Novinki", Coordinate(30.52, 50.45), favorite = false),
-        City(707862, "NP", "Gorkhā", Coordinate(36.23, 49.99), favorite = true),
-        City(707863, "IN", "State of Haryāna", Coordinate(21.01, 52.23), favorite = false)
+        CityTable(707860, "UA", "Hurzuf", CoordinateEmb(34.28, 44.55), favorite = true),
+        CityTable(708546, "UA", "Holubynka", CoordinateEmb(34.28, 44.55), favorite = true),
+        CityTable(1862845, "JP", "Higashi-asahimachi", CoordinateEmb(34.28, 44.55), favorite = false),
+        CityTable(707861, "RU", "Novinki", CoordinateEmb(30.52, 50.45), favorite = false),
+        CityTable(707862, "NP", "Gorkhā", CoordinateEmb(36.23, 49.99), favorite = true),
+        CityTable(707863, "IN", "State of Haryāna", CoordinateEmb(21.01, 52.23), favorite = false)
     )
 
     private fun sampleServiceCities() = listOf(

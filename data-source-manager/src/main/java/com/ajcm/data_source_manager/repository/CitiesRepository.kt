@@ -7,7 +7,7 @@ import androidx.paging.map
 import com.ajcm.data_source_manager.client.CitiesGistService
 import com.ajcm.data_source_manager.repository.mapper.mapToDomain
 import com.ajcm.data_source_manager.repository.mapper.mapToEntity
-import com.ajcm.data_source_manager.repository.model.City
+import com.ajcm.data_source_manager.repository.model.CityData
 import com.ajcm.storage.CitiesDAO
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -36,14 +36,14 @@ class CitiesRepository(
     fun getCitiesBy(
         favorite: Int,
         prefix: String = "",
-    ): Flow<PagingData<City>> {
+    ): Flow<PagingData<CityData>> {
         return Pager(
             config = PagingConfig(pageSize = 20),
             pagingSourceFactory = {
                 citiesDao.getCitiesBy(favorite, prefix)
             }
-        ).flow.map {
-            it.map { cityEntity ->
+        ).flow.map { pagingData ->
+            pagingData.map { cityEntity ->
                 cityEntity.mapToDomain()
             }
         }

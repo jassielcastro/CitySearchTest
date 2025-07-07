@@ -2,9 +2,10 @@ package com.ajcm.citysearch.ui.views.details
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ajcm.citysearch.ui.mapper.toCity
+import com.ajcm.citysearch.ui.model.City
 import com.ajcm.citysearch.ui.views.UiState
 import com.ajcm.data_source_manager.repository.CitiesRepository
-import com.ajcm.data_source_manager.repository.model.City
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -22,7 +23,7 @@ class CityDetailsViewModel(
 
         repository.getCityById(cityId).takeIf { it != null }
             ?.let { city ->
-                _cityDetailsState.value = UiState.Success(city)
+                _cityDetailsState.value = UiState.Success(city.toCity())
             } ?: run {
             _cityDetailsState.value = UiState.Failure
         }
