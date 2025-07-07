@@ -9,30 +9,22 @@ import com.ajcm.storage.data.CityTable
 
 @Dao
 interface CitiesDAO {
+
+    @Query(
+        """
+        SELECT * FROM ${CityTable.TABLE_NAME}
+        LIMIT 1
+    """
+    )
+    suspend fun getSingle(): CityTable?
+
     /**
      * Get all cities ordered by name and country.
      * @param favorite If true, only return favorite cities.
      * @param prefix If not empty, only return cities whose names start with this prefix.
      * The pagination is applied to the results, so it will return a limited number of cities by:
-     * @param limit The maximum number of cities to return.
-     * @param offset The number of cities to skip before starting to return results.
+     * [PagingSource]
      */
-    @Query(
-        """
-        SELECT * FROM ${CityTable.TABLE_NAME}
-        WHERE (:favorite = 0 OR favorite = 1)
-          AND (:prefix == '' OR name LIKE :prefix || '%' COLLATE NOCASE)
-        ORDER BY name ASC, country ASC
-        LIMIT :limit OFFSET :offset
-    """
-    )
-    suspend fun getCitiesBy(
-        favorite: Boolean,
-        prefix: String,
-        limit: Int,
-        offset: Int
-    ): List<CityTable>
-
     @Query(
         """
         SELECT * FROM ${CityTable.TABLE_NAME}

@@ -32,7 +32,7 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.room.testing)
     androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(libs.google.truth)
+    androidTestImplementation(libs.paging.common)
     androidTestImplementation(libs.androidx.test.core)
     androidTestImplementation(libs.kotlinx.coroutines)
 }
