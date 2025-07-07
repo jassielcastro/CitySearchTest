@@ -1,5 +1,8 @@
 package com.ajcm.data_source_manager
 
+import android.util.Log
+import androidx.paging.testing.asPagingSourceFactory
+import androidx.paging.testing.asSnapshot
 import com.ajcm.data_source_manager.client.CitiesGistService
 import com.ajcm.data_source_manager.client.model.CityDto
 import com.ajcm.data_source_manager.client.model.CoordinateDto
@@ -10,8 +13,11 @@ import com.ajcm.storage.data.CoordinateEmb
 import com.google.common.truth.Truth
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
+import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import io.mockk.just
+import io.mockk.mockk
+import io.mockk.mockkStatic
 import io.mockk.runs
 import io.mockk.slot
 import kotlinx.coroutines.runBlocking
@@ -34,6 +40,9 @@ class CitiesRepositoryTest {
     fun setUp() {
         MockKAnnotations.init(this)
 
+        mockkStatic(Log::class)
+        every { Log.isLoggable(any(), any()) } returns false
+
         citiesRepository = CitiesRepository(
             citiesGistService = citiesGistService,
             citiesDao = citiesDao
@@ -41,8 +50,8 @@ class CitiesRepositoryTest {
     }
 
     @Test
-    fun `given app start up, when call isCitiesPopulated, validate the empty value`() {
-        coEvery { citiesDao.getCitiesBy(any(), any(), any(), any()) } returns emptyList()
+    fun `given app start up, when call isCitiesPopulated, validate the null value`() {
+        coEvery { citiesDao.getSingle() } returns null
 
         val isPopulated = runBlocking { citiesRepository.areCitiesPopulated() }
 
@@ -51,7 +60,7 @@ class CitiesRepositoryTest {
 
     @Test
     fun `given app start up, when call isCitiesPopulated, validate the populated value`() {
-        coEvery { citiesDao.getCitiesBy(any(), any(), any(), any()) } returns sampleCities()
+        coEvery { citiesDao.getSingle() } returns mockk()
 
         val isPopulated = runBlocking { citiesRepository.areCitiesPopulated() }
 
@@ -60,18 +69,18 @@ class CitiesRepositoryTest {
 
     @Test
     fun `given the app starts, when user request the cities, then shows all the cities`() {
-        coEvery { citiesDao.getCitiesBy(any(), any(), any(), any()) } returns sampleCities()
+        val pagingSourceFactory = sampleCities().asPagingSourceFactory()
 
-        val cities = runBlocking {
+        coEvery { citiesDao.getCitiesBy(any(), any()) } returns pagingSourceFactory.invoke()
+
+        val loadResult = runBlocking {
             citiesRepository.getCitiesBy(
-                favorite = false,
+                favorite = 0,
                 prefix = "",
-                limit = 10,
-                offset = 0
-            )
+            ).asSnapshot()
         }
 
-        Truth.assertThat(cities).hasSize(6)
+        Truth.assertThat(loadResult).hasSize(6)
     }
 
     @Test
@@ -177,7 +186,13 @@ class CitiesRepositoryTest {
     private fun sampleCities() = listOf(
         CityTable(707860, "UA", "Hurzuf", CoordinateEmb(34.28, 44.55), favorite = true),
         CityTable(708546, "UA", "Holubynka", CoordinateEmb(34.28, 44.55), favorite = true),
-        CityTable(1862845, "JP", "Higashi-asahimachi", CoordinateEmb(34.28, 44.55), favorite = false),
+        CityTable(
+            1862845,
+            "JP",
+            "Higashi-asahimachi",
+            CoordinateEmb(34.28, 44.55),
+            favorite = false
+        ),
         CityTable(707861, "RU", "Novinki", CoordinateEmb(30.52, 50.45), favorite = false),
         CityTable(707862, "NP", "Gorkhā", CoordinateEmb(36.23, 49.99), favorite = true),
         CityTable(707863, "IN", "State of Haryāna", CoordinateEmb(21.01, 52.23), favorite = false)

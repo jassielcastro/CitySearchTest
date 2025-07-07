@@ -18,19 +18,7 @@ class CitiesRepository(
 ) {
 
     suspend fun areCitiesPopulated(): Boolean {
-        return getCitiesBy(
-            limit = 1,
-            offset = 0
-        ).isNotEmpty()
-    }
-
-    suspend fun getCitiesBy(
-        favorite: Boolean = false,
-        prefix: String = "",
-        limit: Int,
-        offset: Int
-    ) = citiesDao.getCitiesBy(favorite, prefix, limit, offset).map {
-        it.mapToDomain()
+        return citiesDao.getSingle() != null
     }
 
     fun getCitiesBy(

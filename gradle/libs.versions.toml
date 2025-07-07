@@ -74,6 +74,7 @@ androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit
 kotlinx-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinCoroutinesTest" }
 mockK = { group = "io.mockk", name = "mockk", version.ref = "mockK" }
 paging-common = { group = "androidx.paging", name = "paging-common", version.ref = "paginCompose" }
+paging-test = { group = "androidx.paging", name = "paging-testing", version.ref = "paginCompose" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

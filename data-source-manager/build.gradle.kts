@@ -52,4 +52,6 @@ dependencies {
     testImplementation(libs.google.truth)
     testImplementation(libs.kotlinx.coroutines)
     testImplementation(libs.mockK)
+    testImplementation(libs.paging.common)
+    testImplementation(libs.paging.test)
 }
