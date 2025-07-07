@@ -4,7 +4,6 @@ import android.content.res.Configuration
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.consumeWindowInsets
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.ime
@@ -64,19 +63,18 @@ fun MainAppContainer() {
 
         Box (
             modifier = Modifier
+                .consumeWindowInsets(WindowInsets.ime)
+                .padding(top = 64.dp)
                 .padding(horizontal = 8.dp)
                 .fillMaxWidth(
                     if (orientation == Configuration.ORIENTATION_PORTRAIT) 1f else 0.45f
                 )
-                .fillMaxHeight()
                 .align(
                     if (orientation == Configuration.ORIENTATION_PORTRAIT) Alignment.BottomCenter
                     else Alignment.CenterStart
                 ),
         ) {
             BottomSheetScaffold(
-                modifier = Modifier
-                    .consumeWindowInsets(WindowInsets.ime),
                 scaffoldState = scaffoldState,
                 sheetContainerColor = MaterialTheme.colorScheme.background,
                 sheetShadowElevation = 8.dp,
