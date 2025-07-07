@@ -36,7 +36,7 @@ class SearchViewModel(
 
     @OptIn(FlowPreview::class)
     private val debouncedPrefix = _prefix
-        .debounce(150)
+        .debounce(250)
         .distinctUntilChanged()
 
     private val _refreshTrigger = MutableSharedFlow<Unit>(extraBufferCapacity = 1)
