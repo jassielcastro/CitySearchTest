@@ -66,7 +66,7 @@ fun MainAppContainer() {
             modifier = Modifier
                 .padding(horizontal = 8.dp)
                 .fillMaxWidth(
-                    if (orientation == Configuration.ORIENTATION_PORTRAIT) 1f else 0.5f
+                    if (orientation == Configuration.ORIENTATION_PORTRAIT) 1f else 0.45f
                 )
                 .fillMaxHeight()
                 .align(
