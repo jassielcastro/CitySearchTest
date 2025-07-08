@@ -10,23 +10,23 @@ import com.ajcm.data_source_manager.repository.model.WeatherDescriptionData
 class CityWeatherRepository(
     private val cityWaterService: CityWaterService,
 ) {
-    suspend fun getWaterBy(
+    suspend fun getWeatherBy(
         latitude: Double,
         longitude: Double,
         apiKey: String
     ): Result<CityWeatherData> {
         try {
-            val call = cityWaterService.getCurrentCityWaterBy(
+            val call = cityWaterService.getCurrentCityWeatherBy(
                 latitude = latitude,
                 longitude = longitude,
                 apiKey = apiKey
             )
 
             if (call.isSuccessful) {
-                val waterData = call.body()
-                return if (waterData != null) {
+                val weatherData = call.body()
+                return if (weatherData != null) {
                     Result.success(
-                        waterData.toData(
+                        weatherData.toData(
                             images = generateRandomImages()
                         )
                     )
@@ -42,6 +42,10 @@ class CityWeatherRepository(
         }
     }
 
+    /*
+     * Generates Fake data for failures, this is used when the API call does not found information
+     * for the given Coordinates.
+     */
     private fun generateMockDataForFailures(): CityWeatherData {
         return CityWeatherData(
             timezone = 7200,

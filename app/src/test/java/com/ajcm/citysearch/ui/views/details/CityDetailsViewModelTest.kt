@@ -113,7 +113,7 @@ class CityDetailsViewModelTest {
         val expectedCityWater = weatherData.toCityWater()
 
         coEvery {
-            cityWeatherRepository.getWaterBy(any(), any(), any())
+            cityWeatherRepository.getWeatherBy(any(), any(), any())
         } returns Result.success(weatherData)
 
         cityDetailsViewModel.loadCityDetails(coordinates)
@@ -123,7 +123,7 @@ class CityDetailsViewModelTest {
                 expectedCityWater
             )
         )
-        coVerify(exactly = 1) { cityWeatherRepository.getWaterBy(any(), any(), any()) }
+        coVerify(exactly = 1) { cityWeatherRepository.getWeatherBy(any(), any(), any()) }
     }
 
     @Test
@@ -131,13 +131,13 @@ class CityDetailsViewModelTest {
         val coordinates = Pair(51.5, -0.1)
         val errorMessage = "API Error"
         coEvery {
-            cityWeatherRepository.getWaterBy(any(), any(), any())
+            cityWeatherRepository.getWeatherBy(any(), any(), any())
         } returns Result.failure(Exception(errorMessage))
 
         cityDetailsViewModel.loadCityDetails(coordinates)
 
         Truth.assertThat(cityDetailsViewModel.cityDetailsState.value).isEqualTo(UiState.Failure)
-        coVerify(exactly = 1) { cityWeatherRepository.getWaterBy(any(), any(), any()) }
+        coVerify(exactly = 1) { cityWeatherRepository.getWeatherBy(any(), any(), any()) }
     }
 
     @Test
@@ -148,7 +148,7 @@ class CityDetailsViewModelTest {
         cityDetailsViewModel.loadCityDetails(coordinates)
 
         Truth.assertThat(cityDetailsViewModel.cityDetailsState.value).isEqualTo(UiState.Loading)
-        coVerify(exactly = 0) { cityWeatherRepository.getWaterBy(any(), any(), any()) }
+        coVerify(exactly = 0) { cityWeatherRepository.getWeatherBy(any(), any(), any()) }
     }
 
     @Test

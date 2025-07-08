@@ -1,11 +1,10 @@
-package com.ajcm.data_source_manager
+package com.ajcm.data_source_manager.repository
 
 import com.ajcm.data_source_manager.client.CityWaterService
 import com.ajcm.data_source_manager.client.model.SunInfoDto
 import com.ajcm.data_source_manager.client.model.TempInfoDto
 import com.ajcm.data_source_manager.client.model.WeatherDto
 import com.ajcm.data_source_manager.client.model.WeatherDescriptionDto
-import com.ajcm.data_source_manager.repository.CityWeatherRepository
 import com.google.common.truth.Truth
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
@@ -35,7 +34,7 @@ class CityWeatherRepositoryTest {
         val cities = mockCityWeatherData()
         val successResponse = Response.success(cities)
         coEvery {
-            cityWaterService.getCurrentCityWaterBy(
+            cityWaterService.getCurrentCityWeatherBy(
                 any(),
                 any(),
                 any()
@@ -43,7 +42,7 @@ class CityWeatherRepositoryTest {
         } returns successResponse
 
         val result = runBlocking {
-            cityWeatherRepository.getWaterBy(40.7128, -74.0060, "test_api_key")
+            cityWeatherRepository.getWeatherBy(40.7128, -74.0060, "test_api_key")
         }
 
         Truth.assertThat(result.isSuccess).isTrue()
@@ -54,7 +53,7 @@ class CityWeatherRepositoryTest {
         val cities = mockCityWeatherData()
         val successResponse = Response.success(cities)
         coEvery {
-            cityWaterService.getCurrentCityWaterBy(
+            cityWaterService.getCurrentCityWeatherBy(
                 any(),
                 any(),
                 any()
@@ -62,7 +61,7 @@ class CityWeatherRepositoryTest {
         } returns successResponse
 
         val result = runBlocking {
-            cityWeatherRepository.getWaterBy(40.7128, -74.0060, "test_api_key")
+            cityWeatherRepository.getWeatherBy(40.7128, -74.0060, "test_api_key")
         }
 
         val waterData = result.getOrNull()
@@ -74,7 +73,7 @@ class CityWeatherRepositoryTest {
         val cities = mockCityWeatherData()
         val successResponse = Response.success(cities)
         coEvery {
-            cityWaterService.getCurrentCityWaterBy(
+            cityWaterService.getCurrentCityWeatherBy(
                 any(),
                 any(),
                 any()
@@ -82,7 +81,7 @@ class CityWeatherRepositoryTest {
         } returns successResponse
 
         val result = runBlocking {
-            cityWeatherRepository.getWaterBy(40.7128, -74.0060, "test_api_key")
+            cityWeatherRepository.getWeatherBy(40.7128, -74.0060, "test_api_key")
         }
 
         val waterData = result.getOrNull()
@@ -101,7 +100,7 @@ class CityWeatherRepositoryTest {
     fun `given a Coordinates, when user click a City, then returns error for by null body`() {
         val successResponse = Response.success<WeatherDto>(null)
         coEvery {
-            cityWaterService.getCurrentCityWaterBy(
+            cityWaterService.getCurrentCityWeatherBy(
                 any(),
                 any(),
                 any()
@@ -109,7 +108,7 @@ class CityWeatherRepositoryTest {
         } returns successResponse
 
         val result = runBlocking {
-            cityWeatherRepository.getWaterBy(40.7128, -74.0060, "test_api_key")
+            cityWeatherRepository.getWeatherBy(40.7128, -74.0060, "test_api_key")
         }
 
         Truth.assertThat(result.isFailure).isTrue()
@@ -118,7 +117,7 @@ class CityWeatherRepositoryTest {
     @Test
     fun `given a Coordinates, when user click a City, then returns error for by connection`() {
         coEvery {
-            cityWaterService.getCurrentCityWaterBy(
+            cityWaterService.getCurrentCityWeatherBy(
                 any(),
                 any(),
                 any()
@@ -126,7 +125,7 @@ class CityWeatherRepositoryTest {
         } throws Exception("Network error")
 
         val result = runBlocking {
-            cityWeatherRepository.getWaterBy(40.7128, -74.0060, "test_api_key")
+            cityWeatherRepository.getWeatherBy(40.7128, -74.0060, "test_api_key")
         }
 
         Truth.assertThat(result.isFailure).isTrue()
@@ -137,7 +136,7 @@ class CityWeatherRepositoryTest {
         val errorResponse =
             Response.error<WeatherDto>(400, "wrong latitude".toResponseBody())
         coEvery {
-            cityWaterService.getCurrentCityWaterBy(
+            cityWaterService.getCurrentCityWeatherBy(
                 any(),
                 any(),
                 any()
@@ -145,7 +144,7 @@ class CityWeatherRepositoryTest {
         } returns errorResponse
 
         val result = runBlocking {
-            cityWeatherRepository.getWaterBy(40.7128, -74.0060, "test_api_key")
+            cityWeatherRepository.getWeatherBy(40.7128, -74.0060, "test_api_key")
         }
 
         val waterData = result.getOrNull()

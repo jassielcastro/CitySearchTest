@@ -1,4 +1,4 @@
-package com.ajcm.data_source_manager
+package com.ajcm.data_source_manager.repository
 
 import android.util.Log
 import androidx.paging.testing.asPagingSourceFactory
@@ -6,7 +6,6 @@ import androidx.paging.testing.asSnapshot
 import com.ajcm.data_source_manager.client.CitiesGistService
 import com.ajcm.data_source_manager.client.model.CityDto
 import com.ajcm.data_source_manager.client.model.CoordinateDto
-import com.ajcm.data_source_manager.repository.CitiesRepository
 import com.ajcm.storage.CitiesDAO
 import com.ajcm.storage.data.CityTable
 import com.ajcm.storage.data.CoordinateEmb

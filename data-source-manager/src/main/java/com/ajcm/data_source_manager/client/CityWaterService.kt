@@ -7,7 +7,7 @@ import retrofit2.http.Query
 
 interface CityWaterService {
     @GET("data/2.5/weather")
-    suspend fun getCurrentCityWaterBy(
+    suspend fun getCurrentCityWeatherBy(
         @Query("lat") latitude: Double,
         @Query("lon") longitude: Double,
         @Query("appid") apiKey: String,

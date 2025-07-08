@@ -46,7 +46,7 @@ class CityDetailsViewModel(
         }
         mCityDetailsState.value = UiState.Loading
 
-        waterRepository.getWaterBy(
+        waterRepository.getWeatherBy(
             latitude = coordinates.first,
             longitude = coordinates.second,
             apiKey = BuildConfig.WEATHER_API_KEY

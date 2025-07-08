@@ -21,6 +21,13 @@ class CitiesRepository(
         return citiesDao.getSingle() != null
     }
 
+    /**
+     * The data is paginated and can be filtered by favorite status and prefix.
+     *
+     * @param favorite The favorite status to filter cities by (0 for non-favorites, 1 for favorites).
+     * @param prefix The prefix to filter city names by (default is an empty string).
+     * @return A [Flow] of [PagingData] containing the filtered cities.
+     */
     fun getCitiesBy(
         favorite: Int,
         prefix: String = "",
