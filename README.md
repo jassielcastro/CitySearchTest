@@ -1,49 +1,23 @@
 <div align="center">
   <div style="display: flex; justify-content: center;">
     <div style="border: 0px solid black; padding: 15px; margin: 5px;">
-      <img src="screenshots/city-search-logo.png" alt="city-search" />
+      <img src="screenshots/city-search-logo.png" alt="city-search" width="250"/>
       <p>  </p>
-      <p>Hi <strong>Developer</strong>!</p>
+      <p>Hi <strong>Ualá Developer</strong>!</p>
       <p>  </p>
-      <p>In this project, you’ll find the Android project evaluation! 💪</p>
+      <p>In this project, you’ll find the Android project evaluation for the City Gist! 💪</p>
     </div>
   </div>
 </div>
 
 ***
 
-## 🧩 Module Type
+# City Search App
 
-**Main Application Module** – This is the entry point of the application and the UI layer
-responsible for displaying city-related features using Jetpack Compose.
-
-## 🎯 Purpose
-
-The `app` module is the central module of the project. It brings together UI, navigation, storage,
-and data-source layers to provide a complete user experience for:
-
-- Viewing a **list of cities**.
-- Displaying each city’s **details and weather information**.
-- Visualizing cities on a **Google Map**.
-- Presenting rich UIs like **image carousels**, **bottom sheets**, and responsive layouts.
-
-## 🏗 Architecture Overview
-
-This module integrates:
-
-- The [`storage`](storage/README.md) module for local data persistence.
-- The [`data-source-manager`](data-source-manager/README.md) module for API access and domain data
-  orchestration.
-- UI and navigation using **Jetpack Compose** and **Navigation Component**.
-
-```mermaid
-graph TD
-    app --> storage
-    app --> data-source-manager
-    data-source-manager --> storage
-```
-
----
+This is a Challenge Android application that allows users to search for cities, view their details,
+and manage their favorite cities.
+The app integrates with Google Maps to display city locations and uses the OpenWeatherMap API to
+fetch weather data.
 
 ## 🔧 Features
 
@@ -61,10 +35,38 @@ graph TD
 |--------------------------------------------------------------|------------------------------------------------------------------------|-------------------------------------------------------------------|
 | <img src="screenshots/splash.png" alt="Splash" width="50%"/> | <img src="screenshots/search-semi-opened.png" alt="hide" width="50%"/> | <img src="screenshots/search-opened.png" alt="hide" width="50%"/> |
 
-
 | Filter favorites                                                       | Filter prefix                                                     | City details                                                     |
 |------------------------------------------------------------------------|-------------------------------------------------------------------|------------------------------------------------------------------|
 | <img src="screenshots/filter-favorites.png" alt="Splash" width="50%"/> | <img src="screenshots/filter-prefix.png" alt="hide" width="50%"/> | <img src="screenshots/city-details.png" alt="hide" width="50%"/> |
+
+| Show cities landscape                                                  | City details landscape                                                |
+|------------------------------------------------------------------------|-----------------------------------------------------------------------|
+| <img src="screenshots/search-landscape.png" alt="Splash" width="50%"/> | <img src="screenshots/details-landscape.png" alt="hide" width="50%"/> |
+
+## 🏗 Architecture Overview
+
+- Viewing a **list of cities**.
+- Displaying each city’s **details and weather information**.
+- Visualizing cities on a **Google Map**.
+- Presenting rich UIs like **image carousels**, **bottom sheets**, and responsive layouts.
+
+This module integrates:
+
+- The [`storage`](storage/README.md) module for local data persistence.
+- The [`data-source-manager`](data-source-manager/README.md) module for API access and domain data
+  orchestration.
+- UI and navigation using **Jetpack Compose** and **Navigation Component**.
+
+#### Module Diagram
+
+```mermaid
+graph TD
+    app --> storage
+    app --> data-source-manager
+    data-source-manager --> storage
+```
+
+---
 
 ## Approach to handle the Gist
 
