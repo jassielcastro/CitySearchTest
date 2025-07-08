@@ -1,5 +1,14 @@
 package com.ajcm.citysearch.ui.views
 
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.core.EaseIn
+import androidx.compose.animation.core.EaseOut
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.runtime.Composable
@@ -23,9 +32,22 @@ fun CitiesMainContainer(
             .fillMaxHeight(0.95f)
             .imePadding(),
         navController = navController,
-        startDestination = Search
+        startDestination = Search,
+        enterTransition = { EnterTransition.None },
+        exitTransition = { ExitTransition.None }
     ) {
-        composable<Search> { _ ->
+        composable<Search>(
+            enterTransition = {
+                fadeIn(
+                    animationSpec = tween(
+                        300, easing = LinearEasing
+                    )
+                ) + slideIntoContainer(
+                    animationSpec = tween(300, easing = EaseIn),
+                    towards = AnimatedContentTransitionScope.SlideDirection.End
+                )
+            }
+        ) { _ ->
             SearchListView(
                 onCitySelected = { cityId ->
                     navController.navigate(CityDetails(cityId))
@@ -33,7 +55,28 @@ fun CitiesMainContainer(
             )
         }
 
-        composable<CityDetails> { navBackStackEntry ->
+        composable<CityDetails>(
+            enterTransition = {
+                fadeIn(
+                    animationSpec = tween(
+                        300, easing = LinearEasing
+                    )
+                ) + slideIntoContainer(
+                    animationSpec = tween(300, easing = EaseIn),
+                    towards = AnimatedContentTransitionScope.SlideDirection.Start
+                )
+            },
+            exitTransition = {
+                fadeOut(
+                    animationSpec = tween(
+                        300, easing = LinearEasing
+                    )
+                ) + slideOutOfContainer(
+                    animationSpec = tween(300, easing = EaseOut),
+                    towards = AnimatedContentTransitionScope.SlideDirection.End
+                )
+            }
+        ) { navBackStackEntry ->
             val details = navBackStackEntry.toRoute<CityDetails>()
             CityDetailsView(
                 cityId = details.cityId,
