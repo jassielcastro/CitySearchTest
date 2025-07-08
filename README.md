@@ -179,3 +179,22 @@ To run the app, follow these steps:
 4. Select the `app` module as the run configuration.
 5. Click the Run button.
 6. The app should launch on your emulator or connected device.
+
+## Testing and UI testing
+
+### UnitTests
+
+- The project includes unit tests for the ViewModel and Repository classes.
+- The project uses JUnit 4 for unit testing.
+- The project uses MockK for mocking dependencies in unit tests.
+- The project uses Google Truth for assertions in unit tests.
+
+### UI Tests
+
+- The project includes partial UI tests, only for the storage features of the app, cause to run the
+  test the projects needs an Android context.
+- For the rest of the features, the project does not include UI tests...
+    - I have not implemented UI Testing for Jetpack Compose yet and this could stop me from
+      finishing the project on time.
+    - Im planning to learn more about UI Testing in Jetpack Compose and implement it in future
+      projects.
