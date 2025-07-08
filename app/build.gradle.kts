@@ -78,6 +78,12 @@ dependencies {
     implementation(libs.coil.network)
 
     testImplementation(libs.junit)
+    testImplementation(libs.room.testing)
+    testImplementation(libs.google.truth)
+    testImplementation(libs.kotlinx.coroutines)
+    testImplementation(libs.mockK)
+    testImplementation(libs.paging.common)
+    testImplementation(libs.paging.test)
 
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

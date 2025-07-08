@@ -1,5 +1,7 @@
 package com.ajcm.citysearch.ui.views.details
 
+import androidx.annotation.VisibleForTesting
+import androidx.annotation.VisibleForTesting.Companion.PRIVATE
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ajcm.citysearch.BuildConfig
@@ -22,9 +24,10 @@ class CityDetailsViewModel(
     var selectedCity = MutableStateFlow<City?>(null)
         private set
 
-    private val _cityDetailsState: MutableStateFlow<UiState<CityWater>> =
+    @VisibleForTesting(otherwise = PRIVATE)
+    val mCityDetailsState: MutableStateFlow<UiState<CityWater>> =
         MutableStateFlow(UiState.Idle)
-    val cityDetailsState = _cityDetailsState.asStateFlow()
+    val cityDetailsState = mCityDetailsState.asStateFlow()
 
     fun loadCity(cityId: Int) = viewModelScope.launch {
         if (selectedCity.value != null) {
@@ -38,20 +41,20 @@ class CityDetailsViewModel(
     }
 
     fun loadCityDetails(coordinates: Pair<Double, Double>) = viewModelScope.launch {
-        if (_cityDetailsState.value !is UiState.Idle) {
+        if (mCityDetailsState.value !is UiState.Idle) {
             return@launch
         }
-        _cityDetailsState.value = UiState.Loading
+        mCityDetailsState.value = UiState.Loading
 
         waterRepository.getWaterBy(
             latitude = coordinates.first,
             longitude = coordinates.second,
             apiKey = BuildConfig.WEATHER_API_KEY
         ).onSuccess { result ->
-            _cityDetailsState.value = UiState.Success(result.toCityWater())
+            mCityDetailsState.value = UiState.Success(result.toCityWater())
         }.onFailure {
             it.printStackTrace()
-            _cityDetailsState.value = UiState.Failure
+            mCityDetailsState.value = UiState.Failure
         }
     }
 
