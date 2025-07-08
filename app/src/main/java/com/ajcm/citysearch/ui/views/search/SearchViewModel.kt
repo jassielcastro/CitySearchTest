@@ -24,19 +24,24 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 class SearchViewModel(
-    private val repository: CitiesRepository
+    private val repository: CitiesRepository,
+    initialLoadDelay: Long = 100L,
+    prefixDelay: Long = 250L,
 ) : ViewModel() {
 
     private val _citiesState: MutableStateFlow<UiState<Unit>> =
         MutableStateFlow(UiState.Idle)
     val citiesState = _citiesState.asStateFlow()
 
+    /*
+     * 0: not favorite, 1: favorite
+     */
     private val _favorite = MutableStateFlow(0)
     private val _prefix = MutableStateFlow("")
 
     @OptIn(FlowPreview::class)
     private val debouncedPrefix = _prefix
-        .debounce(250)
+        .debounce(prefixDelay)
         .distinctUntilChanged()
 
     private val _refreshTrigger = MutableSharedFlow<Unit>(extraBufferCapacity = 1)
@@ -47,7 +52,7 @@ class SearchViewModel(
         _favorite, debouncedPrefix
     ) { favorite, prefix ->
         favorite to prefix
-    }.debounce(100)
+    }.debounce(initialLoadDelay)
         .flatMapLatest { (favorite, prefix) ->
             repository.getCitiesBy(favorite, prefix).map {
                 it.map { it.toCity() }
