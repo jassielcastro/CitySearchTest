@@ -26,7 +26,7 @@ This module was created to:
 
 ## 🌍 External APIs Used
 
-- **[Uala Gist](https://gist.githubusercontent.com/hernan-uala/dce8843a8edbe0b0018b32e137bc2b3a/raw/0996accf70cb0ca0e16f9a99e0ee185fafca7af1/cities.json)**  
+- **[Ualá Gist](https://gist.githubusercontent.com/hernan-uala/dce8843a8edbe0b0018b32e137bc2b3a/raw/0996accf70cb0ca0e16f9a99e0ee185fafca7af1/cities.json)**  
   → Source of the full cities list to populate the DB.
 
 - **[OpenWeatherMap](https://api.openweathermap.org/)**  
